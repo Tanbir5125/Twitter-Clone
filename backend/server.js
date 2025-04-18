@@ -4,6 +4,7 @@ import {v2 as cloudinary} from 'cloudinary';
 
 import authRoutes from './routes/auth.route.js';
 import userRoutes from './routes/user.route.js';
+import postRoutes from './routes/post.route.js';
 
 import connectDB from './config/db.js';
 import { ENV_VARS } from './config/envVars.js';
@@ -24,8 +25,8 @@ app.use(cookieParser()); // to parse cookies from req.headers.cookie
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-
-app.listen(8080, ()=>{
+app.use("/api/posts", postRoutes);
+app.listen(8080, ()=>{ 
     console.log(`Server is running on port ${PORT}`);
     connectDB();
 })
