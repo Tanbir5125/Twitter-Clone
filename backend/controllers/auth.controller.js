@@ -2,10 +2,6 @@ import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
-/**
- * User signup controller
- * Handles new user registration with input validation and password hashing
- */
 export const signup = async (req, res) => {
     try {
         // Extract user data from request body
