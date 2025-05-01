@@ -137,37 +137,37 @@ export const createComment = async (req, res) => {
     }
 }
 
-export const deleteComment = async (req, res) => {
-    try {
-        const commentId = req.params.id;
-        const postId = req.params.postId;
+// export const deleteComment = async (req, res) => {
+//     try {
+//         const commentId = req.params.id;
+//         const postId = req.params.postId;
 
-        const post = await Post.findById(postId);
+//         const post = await Post.findById(postId);
 
-        if (!post) {
-            return res.status(404).json({ message: "Post not found" });
-        }
+//         if (!post) {
+//             return res.status(404).json({ message: "Post not found" });
+//         }
 
-        const comment = post.comments.find((comment) => comment._id.toString() === commentId);
+//         const comment = post.comments.find((comment) => comment._id.toString() === commentId);
 
-        if (!comment) {
-            return res.status(404).json({ message: "Comment not found" });
-        }
+//         if (!comment) {
+//             return res.status(404).json({ message: "Comment not found" });
+//         }
 
-        if (comment.user.toString() !== req.user._id.toString()) {
-            return res.status(403).json({ message: "You are not authorized to delete this comment" });
-        }
+//         if (comment.user.toString() !== req.user._id.toString()) {
+//             return res.status(403).json({ message: "You are not authorized to delete this comment" });
+//         }
 
-        await Post.updateOne(
-            { "_id": postId },
-            { $pull: { comments: { _id: commentId } } }
-        )
-        res.status(200).json({ message: "Comment deleted successfully" });
-    } catch (error) {
-        console.log("Error in deleteComment controller: ", error);
-        res.status(500).json({ message: "Internal Server Error" });
-    }
-}
+//         await Post.updateOne(
+//             { "_id": postId },
+//             { $pull: { comments: { _id: commentId } } }
+//         )
+//         res.status(200).json({ message: "Comment deleted successfully" });
+//     } catch (error) {
+//         console.log("Error in deleteComment controller: ", error);
+//         res.status(500).json({ message: "Internal Server Error" });
+//     }
+// }
 
 export const deletePost = async (req, res) => {
     try {
